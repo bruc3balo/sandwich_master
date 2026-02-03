@@ -1,4 +1,5 @@
 import 'package:form_ni_gani/domain/entities/ingredient.dart';
+import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
 
 class Bread extends Ingredient {
   const Bread({
@@ -6,5 +7,5 @@ class Bread extends Ingredient {
     required super.name,
     required super.description,
     required super.price,
-  });
+  }) : super(type: IngredientType.bread);
 }
