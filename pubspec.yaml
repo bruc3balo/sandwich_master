@@ -1,0 +1,30 @@
+name: form_ni_gani
+description: "A benchmark project comparing Flutter state management patterns for complex forms."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State Management
+  flutter_bloc: ^9.0.0
+  flutter_riverpod: ^2.6.1
+  flutter_hooks: ^0.21.2
+  provider: ^6.1.2
+  
+  # Utilities
+  equatable: ^2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
