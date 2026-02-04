@@ -7,7 +7,9 @@ class AddIngredient {
 
   AddIngredient(this.repository);
 
-  Future<TaskResult<void>> execute(IngredientForm form) async {
+  Future<TaskResult<Ingredient>> execute(CreateIngredientForm form) async {
     return await repository.addIngredient(form);
   }
 }
+
+

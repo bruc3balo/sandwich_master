@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
 import 'package:form_ni_gani/domain/entities/bread.dart';
 import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
 import 'package:form_ni_gani/domain/entities/sauce.dart';
+import 'package:form_ni_gani/domain/entities/topping.dart';
+import 'package:form_ni_gani/domain/forms/sandwich_form.dart';
+import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
 
 class Sandwich extends Equatable {
   final SandwichId id;
@@ -22,6 +23,19 @@ class Sandwich extends Equatable {
     required this.sauces,
   });
 
+  factory Sandwich.fromForm(SandwichForm form) {
+    final id = form.id ?? SandwichId(DateTime.now().microsecondsSinceEpoch.toString());
+    
+    return Sandwich(
+      id: id,
+      name: form.name,
+      bread: form.bread,
+      proteins: form.proteins,
+      toppings: form.toppings,
+      sauces: form.sauces,
+    );
+  }
+
   double get totalPrice {
     double total = bread.price;
     total += proteins.fold(0, (sum, p) => sum + p.price);
@@ -33,3 +47,4 @@ class Sandwich extends Equatable {
   @override
   List<Object?> get props => [id, name, bread, proteins, toppings, sauces];
 }
+

@@ -7,7 +7,7 @@ import 'package:form_ni_gani/domain/utils/task_result.dart';
 abstract class IngredientRepository {
   Future<TaskResult<List<Ingredient>>> getIngredients(PageRequest request);
   Future<TaskResult<Ingredient?>> getIngredientById(IngredientId id);
-  Future<TaskResult<void>> addIngredient(IngredientForm form);
-  Future<TaskResult<void>> updateIngredient(IngredientForm form);
+  Future<TaskResult<Ingredient>> addIngredient(CreateIngredientForm form);
+  Future<TaskResult<Ingredient>> updateIngredient(UpdateIngredientForm form);
   Future<TaskResult<void>> deleteIngredient(IngredientId id);
 }

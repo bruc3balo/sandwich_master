@@ -7,7 +7,9 @@ class UpdateIngredient {
 
   UpdateIngredient(this.repository);
 
-  Future<TaskResult<void>> execute(IngredientForm form) async {
+  Future<TaskResult<Ingredient>> execute(UpdateIngredientForm form) async {
     return await repository.updateIngredient(form);
   }
 }
+
+

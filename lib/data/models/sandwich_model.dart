@@ -38,25 +38,4 @@ class SandwichModel extends HiveObject {
     required this.sauces,
   });
 
-  factory SandwichModel.fromEntity(Sandwich entity) {
-    return SandwichModel(
-      id: entity.id.value,
-      name: entity.name,
-      bread: IngredientModel.fromEntity(entity.bread),
-      proteins: entity.proteins.map((p) => IngredientModel.fromEntity(p)).toList(),
-      toppings: entity.toppings.map((t) => IngredientModel.fromEntity(t)).toList(),
-      sauces: entity.sauces.map((s) => IngredientModel.fromEntity(s)).toList(),
-    );
-  }
-
-  Sandwich toEntity() {
-    return Sandwich(
-      id: SandwichId(id),
-      name: name,
-      bread: bread.toEntity() as Bread,
-      proteins: proteins.map((p) => p.toEntity() as Protein).toList(),
-      toppings: toppings.map((t) => t.toEntity() as Topping).toList(),
-      sauces: sauces.map((s) => s.toEntity() as Sauce).toList(),
-    );
-  }
 }

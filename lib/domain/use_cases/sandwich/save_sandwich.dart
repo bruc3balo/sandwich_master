@@ -7,7 +7,8 @@ class SaveSandwich {
 
   SaveSandwich(this.repository);
 
-  Future<TaskResult<void>> execute(SandwichForm form) async {
+  Future<TaskResult<Sandwich>> execute(SandwichForm form) async {
     return await repository.saveSandwich(form);
   }
 }
+
