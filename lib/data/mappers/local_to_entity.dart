@@ -55,6 +55,7 @@ extension SandwichModelToEntity on SandwichModel {
       proteins: proteins.map((p) => p.toEntity as Protein).toList(),
       toppings: toppings.map((t) => t.toEntity as Topping).toList(),
       sauces: sauces.map((s) => s.toEntity as Sauce).toList(),
+      image: image,
     );
   }
 }

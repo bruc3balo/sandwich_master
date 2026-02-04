@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
 import 'package:form_ni_gani/domain/entities/bread.dart';
 import 'package:form_ni_gani/domain/entities/protein.dart';
@@ -13,6 +14,7 @@ class Sandwich extends Equatable {
   final List<Protein> proteins;
   final List<Topping> toppings;
   final List<Sauce> sauces;
+  final Uint8List? image;
 
   const Sandwich({
     required this.id,
@@ -21,6 +23,7 @@ class Sandwich extends Equatable {
     required this.proteins,
     required this.toppings,
     required this.sauces,
+    this.image,
   });
 
   factory Sandwich.fromForm(SandwichForm form) {
@@ -33,6 +36,7 @@ class Sandwich extends Equatable {
       proteins: form.proteins,
       toppings: form.toppings,
       sauces: form.sauces,
+      image: form.image,
     );
   }
 
@@ -45,6 +49,6 @@ class Sandwich extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, bread, proteins, toppings, sauces];
+  List<Object?> get props => [id, name, bread, proteins, toppings, sauces, image];
 }
 

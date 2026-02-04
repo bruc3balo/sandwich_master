@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
 import 'package:form_ni_gani/domain/entities/bread.dart';
 import 'package:form_ni_gani/domain/entities/protein.dart';
@@ -13,6 +14,7 @@ abstract class Ingredient extends Equatable {
   final String description;
   final double price;
   final IngredientType type;
+  final Uint8List? image;
 
   const Ingredient({
     required this.id,
@@ -20,6 +22,7 @@ abstract class Ingredient extends Equatable {
     required this.description,
     required this.price,
     required this.type,
+    this.image,
   });
 
   factory Ingredient.fromCreateForm(IngredientId id, CreateIngredientForm form) {
@@ -30,6 +33,7 @@ abstract class Ingredient extends Equatable {
           name: form.name,
           description: form.description,
           price: form.price,
+          image: form.image,
         );
       case IngredientType.protein:
         return Protein(
@@ -37,6 +41,7 @@ abstract class Ingredient extends Equatable {
           name: form.name,
           description: form.description,
           price: form.price,
+          image: form.image,
         );
       case IngredientType.topping:
         return Topping(
@@ -44,6 +49,7 @@ abstract class Ingredient extends Equatable {
           name: form.name,
           description: form.description,
           price: form.price,
+          image: form.image,
         );
       case IngredientType.sauce:
         return Sauce(
@@ -51,6 +57,7 @@ abstract class Ingredient extends Equatable {
           name: form.name,
           description: form.description,
           price: form.price,
+          image: form.image,
         );
     }
   }
@@ -60,6 +67,7 @@ abstract class Ingredient extends Equatable {
     final description = form.description ?? existing.description;
     final price = form.price ?? existing.price;
     final type = form.type ?? existing.type;
+    final image = form.image ?? existing.image;
 
     switch (type) {
       case IngredientType.bread:
@@ -68,6 +76,7 @@ abstract class Ingredient extends Equatable {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientType.protein:
         return Protein(
@@ -75,6 +84,7 @@ abstract class Ingredient extends Equatable {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientType.topping:
         return Topping(
@@ -82,6 +92,7 @@ abstract class Ingredient extends Equatable {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientType.sauce:
         return Sauce(
@@ -89,11 +100,12 @@ abstract class Ingredient extends Equatable {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
     }
   }
 
   @override
-  List<Object?> get props => [id, name, description, price, type];
+  List<Object?> get props => [id, name, description, price, type, image];
 }
 

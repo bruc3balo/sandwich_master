@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:hive/hive.dart';
 import 'package:form_ni_gani/data/models/ingredient_type_model.dart';
 
@@ -20,11 +21,15 @@ class IngredientModel extends HiveObject {
   @HiveField(4)
   final IngredientTypeModel type;
 
+  @HiveField(5)
+  final Uint8List? image;
+
   IngredientModel({
     required this.id,
     required this.name,
     required this.description,
     required this.price,
     required this.type,
+    this.image,
   });
 }

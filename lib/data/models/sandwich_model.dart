@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:hive/hive.dart';
 import 'package:form_ni_gani/data/models/ingredient_model.dart';
 import 'package:form_ni_gani/domain/entities/sandwich.dart';
@@ -29,6 +30,9 @@ class SandwichModel extends HiveObject {
   @HiveField(5)
   final List<IngredientModel> sauces;
 
+  @HiveField(6)
+  final Uint8List? image;
+
   SandwichModel({
     required this.id,
     required this.name,
@@ -36,6 +40,7 @@ class SandwichModel extends HiveObject {
     required this.proteins,
     required this.toppings,
     required this.sauces,
+    this.image,
   });
 
 }

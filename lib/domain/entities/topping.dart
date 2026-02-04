@@ -7,5 +7,6 @@ class Topping extends Ingredient {
     required super.name,
     required super.description,
     required super.price,
+    super.image,
   }) : super(type: IngredientType.topping);
 }

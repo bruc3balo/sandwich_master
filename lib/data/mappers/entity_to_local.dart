@@ -12,6 +12,7 @@ extension IngredientToLocal on Ingredient {
       description: description,
       price: price,
       type: type.toLocal,
+      image: image,
     );
   }
 }
@@ -25,6 +26,7 @@ extension SandwichToLocal on Sandwich {
       proteins: proteins.map((p) => p.toLocal).toList(),
       toppings: toppings.map((t) => t.toLocal).toList(),
       sauces: sauces.map((s) => s.toLocal).toList(),
+      image: image,
     );
   }
 }
