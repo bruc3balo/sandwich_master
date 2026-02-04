@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:form_ni_gani/data/data_sources/sandwich/sandwich_data_source.dart';
 import 'package:form_ni_gani/data/models/sandwich_model.dart';
 import 'package:form_ni_gani/data/mappers/entity_to_local.dart';
@@ -9,6 +10,7 @@ import 'package:form_ni_gani/domain/utils/task_result.dart';
 import 'package:form_ni_gani/domain/value_objects/page_request.dart';
 import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
 
+@LazySingleton(as: SandwichRepository)
 class SandwichRepositoryImpl implements SandwichRepository {
   final SandwichDataSource _dataSource;
 

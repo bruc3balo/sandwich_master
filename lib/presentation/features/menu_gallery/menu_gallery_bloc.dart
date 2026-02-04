@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_ni_gani/domain/use_cases/sandwich/get_all_sandwiches.dart';
 import 'package:form_ni_gani/domain/use_cases/sandwich/delete_sandwich.dart';
@@ -6,13 +7,14 @@ import 'package:form_ni_gani/domain/utils/task_result.dart';
 import 'menu_gallery_event.dart';
 import 'menu_gallery_state.dart';
 
+@injectable
 class MenuGalleryBloc extends Bloc<MenuGalleryEvent, MenuGalleryState> {
-  final GetAllSandwiches _getAllSandwiches;
-  final DeleteSandwich _deleteSandwich;
+  final GetAllSandwichesUseCase _getAllSandwiches;
+  final DeleteSandwichUseCase _deleteSandwich;
 
   MenuGalleryBloc({
-    required GetAllSandwiches getAllSandwiches,
-    required DeleteSandwich deleteSandwich,
+    required GetAllSandwichesUseCase getAllSandwiches,
+    required DeleteSandwichUseCase deleteSandwich,
   })  : _getAllSandwiches = getAllSandwiches,
         _deleteSandwich = deleteSandwich,
         super(MenuGalleryInitial()) {

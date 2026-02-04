@@ -1,9 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:hive/hive.dart';
 import 'package:form_ni_gani/data/data_sources/ingredient/ingredient_data_source.dart';
 import 'package:form_ni_gani/data/models/ingredient_model.dart';
 import 'package:form_ni_gani/domain/value_objects/page_request.dart';
 import 'package:form_ni_gani/domain/utils/task_result.dart';
 
+@LazySingleton(as: IngredientDataSource)
 class HiveIngredientDataSource implements IngredientDataSource {
   final Box<IngredientModel> _box;
 
