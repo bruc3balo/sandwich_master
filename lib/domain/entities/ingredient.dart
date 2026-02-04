@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/domain/forms/ingredient_form.dart';
-import 'package:form_ni_gani/domain/value_objects/ingredient_id.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/domain/forms/ingredient_form.dart';
+import 'package:sandwich_master/domain/value_objects/ingredient_id.dart';
 
 abstract class Ingredient extends Equatable {
   final IngredientId id;

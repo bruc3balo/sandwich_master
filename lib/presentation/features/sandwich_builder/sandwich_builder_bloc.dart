@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:form_ni_gani/domain/use_cases/ingredient/get_ingredients.dart';
-import 'package:form_ni_gani/domain/use_cases/sandwich/save_sandwich.dart';
-import 'package:form_ni_gani/domain/value_objects/page_request.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
-import 'package:form_ni_gani/domain/forms/sandwich_form.dart';
+import 'package:sandwich_master/domain/use_cases/ingredient/get_ingredients.dart';
+import 'package:sandwich_master/domain/use_cases/sandwich/save_sandwich.dart';
+import 'package:sandwich_master/domain/value_objects/page_request.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/forms/sandwich_form.dart';
 import 'sandwich_builder_event.dart';
 import 'sandwich_builder_state.dart';
 
@@ -24,12 +24,29 @@ class SandwichBuilderBloc extends Bloc<SandwichBuilderEvent, SandwichBuilderStat
         _saveSandwich = saveSandwich,
         super(SandwichBuilderInitial()) {
     on<LoadIngredients>(_onLoadIngredients);
+    on<InitializeForEdit>(_onInitializeForEdit);
     on<UpdateName>(_onUpdateName);
     on<SelectBread>(_onSelectBread);
     on<ToggleProtein>(_onToggleProtein);
     on<ToggleTopping>(_onToggleTopping);
     on<ToggleSauce>(_onToggleSauce);
+    on<ImageChanged>(_onImageChanged);
     on<SaveSandwichEvent>(_onSaveSandwich);
+  }
+
+  void _onInitializeForEdit(InitializeForEdit event, Emitter<SandwichBuilderState> emit) {
+    if (state is SandwichBuilderReady) {
+      final s = state as SandwichBuilderReady;
+      emit(s.copyWith(
+        id: event.sandwich.id,
+        name: event.sandwich.name,
+        bread: event.sandwich.bread,
+        proteins: event.sandwich.proteins,
+        toppings: event.sandwich.toppings,
+        sauces: event.sandwich.sauces,
+        image: event.sandwich.image,
+      ));
+    }
   }
 
   Future<void> _onLoadIngredients(
@@ -41,7 +58,11 @@ class SandwichBuilderBloc extends Bloc<SandwichBuilderEvent, SandwichBuilderStat
 
     switch (result) {
       case Success(data: final ingredients):
-        emit(SandwichBuilderReady(availableIngredients: ingredients));
+        if (state is SandwichBuilderReady) {
+          emit((state as SandwichBuilderReady).copyWith(availableIngredients: ingredients));
+        } else {
+          emit(SandwichBuilderReady(availableIngredients: ingredients));
+        }
       case Failure(message: final msg):
         emit(SandwichBuilderError(msg));
     }
@@ -98,6 +119,12 @@ class SandwichBuilderBloc extends Bloc<SandwichBuilderEvent, SandwichBuilderStat
     }
   }
 
+  void _onImageChanged(ImageChanged event, Emitter<SandwichBuilderState> emit) {
+    if (state is SandwichBuilderReady) {
+      emit((state as SandwichBuilderReady).copyWith(image: event.image));
+    }
+  }
+
   Future<void> _onSaveSandwich(
     SaveSandwichEvent event,
     Emitter<SandwichBuilderState> emit,
@@ -107,12 +134,13 @@ class SandwichBuilderBloc extends Bloc<SandwichBuilderEvent, SandwichBuilderStat
       emit(s.copyWith(isSaving: true));
       
       final form = SandwichForm(
+        id: s.id,
         name: s.name,
         bread: s.bread!,
         proteins: s.proteins,
         toppings: s.toppings,
         sauces: s.sauces,
-        // image can be generated or selected later
+        image: s.image,
       );
 
       final result = await _saveSandwich.execute(form);

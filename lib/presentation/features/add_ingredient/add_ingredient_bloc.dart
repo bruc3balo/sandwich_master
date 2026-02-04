@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:form_ni_gani/domain/use_cases/ingredient/add_ingredient.dart';
-import 'package:form_ni_gani/domain/use_cases/ingredient/update_ingredient.dart';
-import 'package:form_ni_gani/domain/forms/ingredient_form.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/use_cases/ingredient/add_ingredient.dart';
+import 'package:sandwich_master/domain/use_cases/ingredient/update_ingredient.dart';
+import 'package:sandwich_master/domain/forms/ingredient_form.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
 import 'add_ingredient_event.dart';
 import 'add_ingredient_state.dart';
 

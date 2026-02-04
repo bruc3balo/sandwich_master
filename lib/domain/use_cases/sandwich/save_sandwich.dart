@@ -1,7 +1,7 @@
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/forms/sandwich_form.dart';
-import 'package:form_ni_gani/domain/repositories/sandwich_repository.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/forms/sandwich_form.dart';
+import 'package:sandwich_master/domain/repositories/sandwich_repository.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
 
 import 'package:injectable/injectable.dart';
 

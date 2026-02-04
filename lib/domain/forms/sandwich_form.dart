@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
 
 class SandwichForm extends Equatable {
   final SandwichId? id;

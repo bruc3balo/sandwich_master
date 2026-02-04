@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_ni_gani/core/navigation/app_router.dart';
+import 'package:sandwich_master/core/navigation/app_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             FadeTransition(
               opacity: _opacity,
               child: const Text(
-                'StackMaster',
+                'Sandwich Master',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 42,

@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_ni_gani/domain/use_cases/sandwich/get_all_sandwiches.dart';
-import 'package:form_ni_gani/domain/use_cases/sandwich/delete_sandwich.dart';
-import 'package:form_ni_gani/domain/value_objects/page_request.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/use_cases/sandwich/get_all_sandwiches.dart';
+import 'package:sandwich_master/domain/use_cases/sandwich/delete_sandwich.dart';
+import 'package:sandwich_master/domain/value_objects/page_request.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
 import 'menu_gallery_event.dart';
 import 'menu_gallery_state.dart';
 

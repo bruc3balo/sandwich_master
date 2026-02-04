@@ -1,6 +1,7 @@
-name: form_ni_gani
-description: "A benchmark project comparing Flutter state management patterns for complex forms."
+name: sandwich_master
+description: "A premium sandwich creation and collection app built with Flutter."
 publish_to: 'none'
+home: https://github.com/bruc3balo/sandwich_master
 version: 1.0.0+1
 
 environment:

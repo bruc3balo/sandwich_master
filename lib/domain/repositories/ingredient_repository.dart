@@ -1,8 +1,8 @@
-import 'package:form_ni_gani/domain/forms/ingredient_form.dart';
-import 'package:form_ni_gani/domain/value_objects/ingredient_id.dart';
-import 'package:form_ni_gani/domain/value_objects/page_request.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/forms/ingredient_form.dart';
+import 'package:sandwich_master/domain/value_objects/ingredient_id.dart';
+import 'package:sandwich_master/domain/value_objects/page_request.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
 
 abstract class IngredientRepository {
   Future<TaskResult<List<Ingredient>>> getIngredients(PageRequest request);

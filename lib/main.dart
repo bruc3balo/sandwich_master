@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:form_ni_gani/core/di/injection.dart';
-import 'package:form_ni_gani/core/navigation/app_router.dart';
+import 'package:sandwich_master/core/di/injection.dart';
+import 'package:sandwich_master/core/navigation/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,16 +12,16 @@ void main() async {
   // Initialize DI (This now handles adapters and boxes)
   await configureDependencies();
   
-  runApp(const StackMaster());
+  runApp(const SandwichMaster());
 }
 
-class StackMaster extends StatelessWidget {
-  const StackMaster({super.key});
+class SandwichMaster extends StatelessWidget {
+  const SandwichMaster({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'StackMaster',
+      title: 'Sandwich Master',
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
       theme: ThemeData(

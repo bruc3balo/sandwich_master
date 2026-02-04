@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 import 'package:hive/hive.dart';
-import 'package:form_ni_gani/data/models/ingredient_model.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
+import 'package:sandwich_master/data/models/ingredient_model.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
 
 part 'sandwich_model.g.dart';
 

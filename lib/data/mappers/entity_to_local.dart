@@ -1,8 +1,8 @@
-import 'package:form_ni_gani/data/models/ingredient_model.dart';
-import 'package:form_ni_gani/data/models/sandwich_model.dart';
-import 'package:form_ni_gani/data/mappers/ingredient_type_mapper.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
+import 'package:sandwich_master/data/models/ingredient_model.dart';
+import 'package:sandwich_master/data/models/sandwich_model.dart';
+import 'package:sandwich_master/data/mappers/ingredient_type_mapper.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
 
 extension IngredientToLocal on Ingredient {
   IngredientModel get toLocal {

@@ -1,5 +1,5 @@
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
 
 class Sauce extends Ingredient {
   const Sauce({

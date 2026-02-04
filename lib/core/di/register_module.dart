@@ -1,8 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:form_ni_gani/data/models/ingredient_model.dart';
-import 'package:form_ni_gani/data/models/sandwich_model.dart';
-import 'package:form_ni_gani/data/models/ingredient_type_model.dart';
+import 'package:sandwich_master/data/models/ingredient_model.dart';
+import 'package:sandwich_master/data/models/sandwich_model.dart';
+import 'package:sandwich_master/data/models/ingredient_type_model.dart';
 
 @module
 abstract class RegisterModule {

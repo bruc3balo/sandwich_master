@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
 
 abstract class MenuGalleryEvent extends Equatable {
   const MenuGalleryEvent();

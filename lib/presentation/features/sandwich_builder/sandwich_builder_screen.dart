@@ -1,78 +1,108 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/presentation/widgets/component/image_card.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/presentation/widgets/component/image_card.dart';
+import 'package:image_picker/image_picker.dart';
 import 'sandwich_builder_bloc.dart';
 import 'sandwich_builder_event.dart';
 import 'sandwich_builder_state.dart';
 
-class SandwichBuilderScreen extends StatelessWidget {
+class SandwichBuilderScreen extends StatefulWidget {
   const SandwichBuilderScreen({super.key});
 
   @override
+  State<SandwichBuilderScreen> createState() => _SandwichBuilderScreenState();
+}
+
+class _SandwichBuilderScreenState extends State<SandwichBuilderScreen> {
+  late final TextEditingController _nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+    
+    // Listen to bloc state for initial name if editing
+    final bloc = context.read<SandwichBuilderBloc>();
+    if (bloc.state is SandwichBuilderReady) {
+       _nameController.text = (bloc.state as SandwichBuilderReady).name;
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => context.read<SandwichBuilderBloc>()..add(LoadIngredients()),
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
-        appBar: AppBar(
-          title: const Text('Sandwich Lab', style: TextStyle(fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => context.pop(),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.grey.shade50,
+      appBar: AppBar(
+        title: BlocSelector<SandwichBuilderBloc, SandwichBuilderState, bool>(
+          selector: (state) => (state is SandwichBuilderReady) && state.isEdit,
+          builder: (context, isEdit) => Text(isEdit ? 'Refine Sandwich' : 'Sandwich Lab', style: const TextStyle(fontWeight: FontWeight.bold)),
         ),
-        body: BlocConsumer<SandwichBuilderBloc, SandwichBuilderState>(
-          listener: (context, state) {
-            if (state is SandwichBuilderSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Sandwich Saved!')),
-              );
-              context.pop();
-            }
-          },
-          builder: (context, state) {
-            if (state is SandwichBuilderLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => context.pop(),
+        ),
+      ),
+      body: BlocConsumer<SandwichBuilderBloc, SandwichBuilderState>(
+        listener: (context, state) {
+          if (state is SandwichBuilderSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Sandwich Saved!')),
+            );
+            context.pop();
+          }
+          // Update controller if state name changes externally (initialization)
+          if (state is SandwichBuilderReady && _nameController.text != state.name) {
+             _nameController.text = state.name;
+          }
+        },
+        builder: (context, state) {
+          if (state is SandwichBuilderLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (state is SandwichBuilderError) {
-              return Center(child: Text(state.message));
-            }
+          if (state is SandwichBuilderError) {
+            return Center(child: Text(state.message));
+          }
 
-            if (state is SandwichBuilderReady) {
-              return Column(
-                children: [
-                   Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(24),
-                      child: Column(
-                        children: [
-                          _SandwichPreview(state: state),
-                          const SizedBox(height: 32),
-                          _NameInput(name: state.name),
-                          const SizedBox(height: 24),
-                          _IngredientSelector(state: state),
-                        ],
-                      ),
+          if (state is SandwichBuilderReady) {
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      children: [
+                        _SandwichPreview(state: state),
+                        const SizedBox(height: 32),
+                        _NameInput(controller: _nameController),
+                        const SizedBox(height: 24),
+                        _IngredientSelector(state: state),
+                      ],
                     ),
                   ),
-                  _BottomAction(state: state),
-                ],
-              );
-            }
+                ),
+                _BottomAction(state: state),
+              ],
+            );
+          }
 
-            return const SizedBox.shrink();
-          },
-        ),
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
@@ -86,10 +116,22 @@ class _SandwichPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ImageCard(
-          imageData: null, // We'll show the stack below instead
-          height: 120,
-          width: 200,
+        GestureDetector(
+          onTap: () async {
+            final picker = ImagePicker();
+            final xFile = await picker.pickImage(source: ImageSource.gallery);
+            if (xFile != null) {
+              final bytes = await xFile.readAsBytes();
+              if (context.mounted) {
+                context.read<SandwichBuilderBloc>().add(ImageChanged(bytes));
+              }
+            }
+          },
+          child: ImageCard(
+            imageData: state.image,
+            height: 120,
+            width: 200,
+          ),
         ),
         const SizedBox(height: 24),
         Container(
@@ -165,12 +207,13 @@ class _StackLayer extends StatelessWidget {
 }
 
 class _NameInput extends StatelessWidget {
-  final String name;
-  const _NameInput({required this.name});
+  final TextEditingController controller;
+  const _NameInput({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       onChanged: (val) => context.read<SandwichBuilderBloc>().add(UpdateName(val)),
       decoration: InputDecoration(
         labelText: 'Sandwich Name',
@@ -232,10 +275,10 @@ class _IngredientSelector extends StatelessWidget {
   }
 
   bool _isIngredientSelected(Ingredient ingredient) {
-    if (ingredient is Bread) return state.bread == ingredient;
-    if (ingredient is Protein) return state.proteins.contains(ingredient);
-    if (ingredient is Topping) return state.toppings.contains(ingredient);
-    if (ingredient is Sauce) return state.sauces.contains(ingredient);
+    if (ingredient is Bread) return state.bread?.id == ingredient.id;
+    if (ingredient is Protein) return state.proteins.any((p) => p.id == ingredient.id);
+    if (ingredient is Topping) return state.toppings.any((t) => t.id == ingredient.id);
+    if (ingredient is Sauce) return state.sauces.any((s) => s.id == ingredient.id);
     return false;
   }
 
@@ -261,25 +304,33 @@ class _IngredientTile extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: 120,
-        padding: const EdgeInsets.all(12),
+        width: 100,
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: isSelected ? Colors.deepOrange.shade50 : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: isSelected ? Colors.deepOrange : Colors.grey.shade200, width: 2),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(
+              child: ImageCard(
+                imageData: ingredient.image,
+                height: 50,
+              ),
+            ),
+            const SizedBox(height: 8),
             Text(
               ingredient.name,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-              maxLines: 2,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 4),
-            Text('\$${ingredient.price.toStringAsFixed(2)}', style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+            Text(
+              '\$${ingredient.price.toStringAsFixed(2)}',
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 10),
+            ),
           ],
         ),
       ),
@@ -326,7 +377,7 @@ class _BottomAction extends StatelessWidget {
                 ),
                 child: state.isSaving 
                   ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                  : const Text('Save Creation', style: TextStyle(fontWeight: FontWeight.bold)),
+                  : Text(state.isEdit ? 'Update Sandwich' : 'Save Creation', style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],

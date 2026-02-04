@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
 
 sealed class SandwichBuilderState extends Equatable {
   const SandwichBuilderState();
@@ -23,6 +24,8 @@ class SandwichBuilderReady extends SandwichBuilderState {
   final List<Protein> proteins;
   final List<Topping> toppings;
   final List<Sauce> sauces;
+  final SandwichId? id;
+  final dynamic image; // Uint8List?
   final bool isSaving;
 
   const SandwichBuilderReady({
@@ -32,8 +35,12 @@ class SandwichBuilderReady extends SandwichBuilderState {
     this.proteins = const [],
     this.toppings = const [],
     this.sauces = const [],
+    this.id,
+    this.image,
     this.isSaving = false,
   });
+
+  bool get isEdit => id != null;
 
   bool get isValid => name.isNotEmpty && bread != null && (proteins.isNotEmpty || toppings.isNotEmpty);
 
@@ -46,7 +53,7 @@ class SandwichBuilderReady extends SandwichBuilderState {
   }
 
   @override
-  List<Object?> get props => [availableIngredients, name, bread, proteins, toppings, sauces, isSaving];
+  List<Object?> get props => [availableIngredients, name, bread, proteins, toppings, sauces, id, image, isSaving];
 
   SandwichBuilderReady copyWith({
     List<Ingredient>? availableIngredients,
@@ -55,6 +62,8 @@ class SandwichBuilderReady extends SandwichBuilderState {
     List<Protein>? proteins,
     List<Topping>? toppings,
     List<Sauce>? sauces,
+    SandwichId? id,
+    dynamic image,
     bool? isSaving,
   }) {
     return SandwichBuilderReady(
@@ -64,6 +73,8 @@ class SandwichBuilderReady extends SandwichBuilderState {
       proteins: proteins ?? this.proteins,
       toppings: toppings ?? this.toppings,
       sauces: sauces ?? this.sauces,
+      id: id ?? this.id,
+      image: image ?? this.image,
       isSaving: isSaving ?? this.isSaving,
     );
   }

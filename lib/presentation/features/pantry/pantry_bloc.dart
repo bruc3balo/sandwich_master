@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:form_ni_gani/domain/use_cases/ingredient/get_ingredients.dart';
-import 'package:form_ni_gani/domain/use_cases/ingredient/delete_ingredient.dart';
-import 'package:form_ni_gani/domain/value_objects/page_request.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/use_cases/ingredient/get_ingredients.dart';
+import 'package:sandwich_master/domain/use_cases/ingredient/delete_ingredient.dart';
+import 'package:sandwich_master/domain/value_objects/page_request.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
 import 'pantry_event.dart';
 import 'pantry_state.dart';
 

@@ -1,5 +1,5 @@
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/data/models/ingredient_type_model.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/data/models/ingredient_type_model.dart';
 
 extension IngredientTypeToLocal on IngredientType {
   IngredientTypeModel get toLocal {

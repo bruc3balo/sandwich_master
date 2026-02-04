@@ -1,61 +1,23 @@
-# Form Ni Gani? (Which Form?) 📝
+# Sandwich Master 🥪✨
 
-**Form Ni Gani** is a benchmark project designed to explore and compare various **Flutter State Management** patterns when applied to **complex, multi-field forms**. 
+**Sandwich Master** is a premium Flutter application designed for the ultimate sandwich experience. From managing your gourmet **Pantry** of ingredients to crafting state-of-the-art culinary creations in the **Sandwich Lab**, this app is the definitive tool for any sandwich enthusiast.
 
-Managing state in large forms (with validation, dependent fields, and asynchronous data) is one of the most debated topics in Flutter development. This project implements the exact same complex form using different state providers to help developers decide which pattern fits their needs best.
+## 🌟 Key Features
 
-## 🚀 The Mission
+- **Sandwich Lab (Builder)**: A high-fidelity, interactive builder where you can stack breads, proteins, toppings, and sauces. Visualize your creation layer by layer!
+- **Menu Gallery**: Your personal cookbook of masterpiece sandwiches. View, edit, or "cook" your previous creations.
+- **Pantry Management**: A high-density inventory system for your ingredients. Catalog everything from artisanal sourdough to top-shelf condiments.
+- **Image Support**: Fully integrated image picking for both ingredients and your final sandwich creations.
 
-Build a robust, scalable, and maintainable form architecture that:
-- Uses a **unified data source** (Repository/Local Storage).
-- Decouples UI from business logic.
-- Demonstrates handling of complex validation and inter-field dependencies.
-- Showcases the "Developer Experience" (DX) of each state management solution.
+## 🏗 Architecture & Tech Stack
 
-## 🛠 State Management Implementations
+This project is built with professional-grade Flutter standards:
 
-Each implementation resides in its own module/feature directory, using the same underlying business logic but a different state provider:
-
-| Provider | Description | Complexity |
-| :--- | :--- | :--- |
-| **BLoC (Business Logic Component)** | Event-driven, strict separation of concerns, highly testable. | High |
-| **Riverpod** | Compile-safe, no context dependency, powerful dependency injection. | Medium-High |
-| **Flutter Hooks** | Functional approach to state, reduces boilerplate for widget-local state. | Medium |
-| **ChangeNotifier** | Built-in Flutter solution, easy to understand, great for simple to medium complexity. | Low-Medium |
-| **ValueNotifier** | Lightweight, granular updates, perfect for high-performance UI components. | Low |
-
-## 🏗 Architecture
-
-The project follows a **Layered Architecture**:
-
-1.  **Data Layer**: Repositories and models (Shared across all implementations).
-2.  **Domain Layer**: Entities and business logic (Shared).
-3.  **Presentation Layer**: 
-    - **View Model / Controller**: Specific to the state management provider.
-    - **View (UI)**: Identical layouts reacting to different state streams/notifiers.
-
-## 🚦 Getting Started
-
-### Prerequisites
-- Flutter SDK (Latest Stable)
-- Dart SDK
-
-### Running a specific version
-Each implementation is linked from the main dashboard. You can navigate to the specific implementation to see it in action.
-
-```bash
-flutter run
-```
-
-## 📊 Comparison Matrix
-
-| Feature | BLoC | Riverpod | Hooks | ChangeNotifier | ValueNotifier |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Boilerplate | High | Medium | Low | Low | Very Low |
-| Scalability | Excellent | Excellent | Good | Medium | Medium |
-| Testability | Excellent | Excellent | Medium | Good | Good |
-| Learning Curve | Steep | Medium | Medium | Easy | Easy |
+- **State Management**: [flutter_bloc](https://pub.dev/packages/flutter_bloc) for robust, event-driven business logic.
+- **Navigation**: [go_router](https://pub.dev/packages/go_router) for declarative, URL-based routing.
+- **Local Persistence**: [Hive](https://pub.dev/packages/hive) for blazing-fast local storage of your culinary data.
+- **Dependency Injection**: [get_it](https://pub.dev/packages/get_it) with [injectable](https://pub.dev/packages/injectable) for clean, decoupled components.
+- **Clean Architecture**: Strict separation between Data, Domain, and Presentation layers.
 
 ## 📜 License
 This project is open-source and available under the MIT License.
-

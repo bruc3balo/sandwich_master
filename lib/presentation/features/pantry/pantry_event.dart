@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/domain/value_objects/ingredient_id.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/domain/value_objects/ingredient_id.dart';
 
 sealed class PantryEvent extends Equatable {
   const PantryEvent();

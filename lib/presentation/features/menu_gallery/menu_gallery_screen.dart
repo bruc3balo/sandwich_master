@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/presentation/widgets/component/image_card.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/presentation/widgets/component/image_card.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_ni_gani/core/navigation/app_router.dart';
+import 'package:sandwich_master/core/navigation/app_router.dart';
 import 'menu_gallery_bloc.dart';
 import 'menu_gallery_event.dart';
 import 'menu_gallery_state.dart';
@@ -104,8 +104,11 @@ class MenuGalleryScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.push(AppRouter.builder);
+        onPressed: () async {
+          await context.push(AppRouter.builder);
+          if (context.mounted) {
+            context.read<MenuGalleryBloc>().add(const FetchSandwiches(refresh: true));
+          }
         },
         label: const Text('Create New'),
         icon: const Icon(Icons.add),
@@ -185,6 +188,10 @@ class _SandwichGalleryCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit_outlined, color: Colors.grey),
+                      onPressed: () => context.push(AppRouter.builder, extra: sandwich),
+                    ),
                     IconButton(
                       icon: const Icon(Icons.delete_outline, color: Colors.grey),
                       onPressed: () => _confirmDelete(context),

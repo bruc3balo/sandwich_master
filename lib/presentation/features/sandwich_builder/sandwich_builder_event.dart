@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
 
 sealed class SandwichBuilderEvent extends Equatable {
   const SandwichBuilderEvent();
@@ -12,6 +13,14 @@ sealed class SandwichBuilderEvent extends Equatable {
 }
 
 class LoadIngredients extends SandwichBuilderEvent {}
+
+class InitializeForEdit extends SandwichBuilderEvent {
+  final Sandwich sandwich;
+  const InitializeForEdit(this.sandwich);
+
+  @override
+  List<Object?> get props => [sandwich];
+}
 
 class UpdateName extends SandwichBuilderEvent {
   final String name;
@@ -51,6 +60,14 @@ class ToggleSauce extends SandwichBuilderEvent {
 
   @override
   List<Object?> get props => [sauce];
+}
+
+class ImageChanged extends SandwichBuilderEvent {
+  final dynamic image; // Uint8List?
+  const ImageChanged(this.image);
+
+  @override
+  List<Object?> get props => [image];
 }
 
 class SaveSandwichEvent extends SandwichBuilderEvent {}

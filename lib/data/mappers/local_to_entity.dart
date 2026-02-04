@@ -1,14 +1,14 @@
-import 'package:form_ni_gani/data/models/ingredient_model.dart';
-import 'package:form_ni_gani/data/models/ingredient_type_model.dart';
-import 'package:form_ni_gani/data/models/sandwich_model.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/bread.dart';
-import 'package:form_ni_gani/domain/entities/protein.dart';
-import 'package:form_ni_gani/domain/entities/topping.dart';
-import 'package:form_ni_gani/domain/entities/sauce.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/value_objects/ingredient_id.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
+import 'package:sandwich_master/data/models/ingredient_model.dart';
+import 'package:sandwich_master/data/models/ingredient_type_model.dart';
+import 'package:sandwich_master/data/models/sandwich_model.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/bread.dart';
+import 'package:sandwich_master/domain/entities/protein.dart';
+import 'package:sandwich_master/domain/entities/topping.dart';
+import 'package:sandwich_master/domain/entities/sauce.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/value_objects/ingredient_id.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
 
 extension IngredientModelToEntity on IngredientModel {
   Ingredient get toEntity {
@@ -20,6 +20,7 @@ extension IngredientModelToEntity on IngredientModel {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientTypeModel.protein:
         return Protein(
@@ -27,6 +28,7 @@ extension IngredientModelToEntity on IngredientModel {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientTypeModel.topping:
         return Topping(
@@ -34,6 +36,7 @@ extension IngredientModelToEntity on IngredientModel {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
       case IngredientTypeModel.sauce:
         return Sauce(
@@ -41,6 +44,7 @@ extension IngredientModelToEntity on IngredientModel {
           name: name,
           description: description,
           price: price,
+          image: image,
         );
     }
   }

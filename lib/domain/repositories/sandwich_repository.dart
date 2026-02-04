@@ -1,8 +1,8 @@
-import 'package:form_ni_gani/domain/forms/sandwich_form.dart';
-import 'package:form_ni_gani/domain/value_objects/sandwich_id.dart';
-import 'package:form_ni_gani/domain/value_objects/page_request.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
-import 'package:form_ni_gani/domain/utils/task_result.dart';
+import 'package:sandwich_master/domain/forms/sandwich_form.dart';
+import 'package:sandwich_master/domain/value_objects/sandwich_id.dart';
+import 'package:sandwich_master/domain/value_objects/page_request.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/utils/task_result.dart';
 
 abstract class SandwichRepository {
   Future<TaskResult<Sandwich>> saveSandwich(SandwichForm form);

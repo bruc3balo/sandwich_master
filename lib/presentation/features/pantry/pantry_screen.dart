@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
-import 'package:form_ni_gani/presentation/widgets/component/ingredient_card.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/presentation/widgets/component/ingredient_card.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_ni_gani/core/navigation/app_router.dart';
+import 'package:sandwich_master/core/navigation/app_router.dart';
 import 'pantry_bloc.dart';
 import 'pantry_event.dart';
 import 'pantry_state.dart';
@@ -62,10 +62,10 @@ class PantryScreen extends StatelessWidget {
                   return GridView.builder(
                     padding: const EdgeInsets.all(16),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 0.85,
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      childAspectRatio: 0.75,
                     ),
                     itemCount: state.filteredIngredients.length,
                     itemBuilder: (context, index) {
@@ -198,10 +198,10 @@ class _PantryIngredientItem extends StatelessWidget {
       children: [
         IngredientCard(ingredient: ingredient),
         Positioned(
-          top: 8,
-          right: 8,
+          top: 2,
+          right: 2,
           child: PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert, color: Colors.grey, size: 20),
+            icon: const Icon(Icons.more_vert, color: Colors.white, size: 16),
             onSelected: (value) {
               if (value == 'delete') {
                 _confirmDelete(context);

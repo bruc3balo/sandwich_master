@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:hive/hive.dart';
-import 'package:form_ni_gani/data/models/ingredient_type_model.dart';
+import 'package:sandwich_master/data/models/ingredient_type_model.dart';
 
 part 'ingredient_model.g.dart';
 

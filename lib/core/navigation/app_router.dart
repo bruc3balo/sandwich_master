@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_ni_gani/core/di/injection.dart';
-import 'package:form_ni_gani/presentation/features/menu_gallery/menu_gallery_bloc.dart';
-import 'package:form_ni_gani/presentation/features/menu_gallery/menu_gallery_screen.dart';
-import 'package:form_ni_gani/presentation/features/pantry/pantry_bloc.dart';
-import 'package:form_ni_gani/presentation/features/pantry/pantry_screen.dart';
+import 'package:sandwich_master/core/di/injection.dart';
+import 'package:sandwich_master/presentation/features/menu_gallery/menu_gallery_bloc.dart';
+import 'package:sandwich_master/presentation/features/menu_gallery/menu_gallery_screen.dart';
+import 'package:sandwich_master/presentation/features/pantry/pantry_bloc.dart';
+import 'package:sandwich_master/presentation/features/pantry/pantry_screen.dart';
 
-import 'package:form_ni_gani/presentation/features/splash/splash_screen.dart';
-import 'package:form_ni_gani/presentation/features/sandwich_builder/sandwich_builder_bloc.dart';
-import 'package:form_ni_gani/presentation/features/sandwich_builder/sandwich_builder_screen.dart';
-import 'package:form_ni_gani/presentation/features/add_ingredient/add_ingredient_bloc.dart';
-import 'package:form_ni_gani/presentation/features/add_ingredient/add_ingredient_screen.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
+import 'package:sandwich_master/presentation/features/splash/splash_screen.dart';
+import 'package:sandwich_master/presentation/features/sandwich_builder/sandwich_builder_bloc.dart';
+import 'package:sandwich_master/presentation/features/sandwich_builder/sandwich_builder_screen.dart';
+import 'package:sandwich_master/presentation/features/sandwich_builder/sandwich_builder_event.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
+import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredient_bloc.dart';
+import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredient_event.dart';
+import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredient_screen.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
 
 class AppRouter {
   static const String root = '/';
@@ -52,17 +55,32 @@ class AppRouter {
       ),
       GoRoute(
         path: builder,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt<SandwichBuilderBloc>(),
-          child: const SandwichBuilderScreen(),
-        ),
+        builder: (context, state) {
+          final sandwich = state.extra as Sandwich?;
+          return BlocProvider(
+            create: (context) {
+              final bloc = getIt<SandwichBuilderBloc>()..add(LoadIngredients());
+              if (sandwich != null) {
+                bloc.add(InitializeForEdit(sandwich));
+              }
+              return bloc;
+            },
+            child: const SandwichBuilderScreen(),
+          );
+        },
       ),
       GoRoute(
         path: addIngredient,
         builder: (context, state) {
           final ingredient = state.extra as Ingredient?;
           return BlocProvider(
-            create: (context) => getIt<AddIngredientBloc>(),
+            create: (context) {
+              final bloc = getIt<AddIngredientBloc>();
+              if (ingredient != null) {
+                bloc.add(InitializeForUpdate(ingredient));
+              }
+              return bloc;
+            },
             child: AddIngredientScreen(ingredientToUpdate: ingredient),
           );
         },

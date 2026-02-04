@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/ingredient.dart';
-import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
+import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/domain/entities/ingredient_type.dart';
 
 sealed class AddIngredientState extends Equatable {
   const AddIngredientState();

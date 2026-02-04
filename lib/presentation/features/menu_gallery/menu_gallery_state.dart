@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:form_ni_gani/domain/entities/sandwich.dart';
+import 'package:sandwich_master/domain/entities/sandwich.dart';
 
 abstract class MenuGalleryState extends Equatable {
   const MenuGalleryState();
