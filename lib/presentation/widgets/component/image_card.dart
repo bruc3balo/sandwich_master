@@ -16,7 +16,7 @@ class ImageCard extends StatelessWidget {
   });
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       height: height,
       width: width,

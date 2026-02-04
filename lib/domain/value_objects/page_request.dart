@@ -10,6 +10,9 @@ class PageRequest extends Equatable {
   }) : assert(page >= 0),
        assert(pageSize > 0);
 
+  int get offset => page * pageSize;
+  int get limit => pageSize;
+
   @override
   List<Object?> get props => [page, pageSize];
 }

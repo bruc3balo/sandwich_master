@@ -28,7 +28,7 @@ class IngredientCard extends StatelessWidget {
   }
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final typeColor = _getTypeColor();
 
     return Card(
@@ -82,7 +82,7 @@ class IngredientCard extends StatelessWidget {
                 const SizedBox(height: 8),
               ],
               Text(
-                '$${ingredient.price.toStringAsFixed(2)}',
+                'Price: \$${ingredient.price.toStringAsFixed(2)}',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,

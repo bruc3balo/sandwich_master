@@ -31,7 +31,7 @@ class MenuGalleryBloc extends Bloc<MenuGalleryEvent, MenuGalleryState> {
     }
 
     final result = await _getAllSandwiches.execute(
-      const PageRequest(offset: 0, limit: 100), // Standard limit for gallery
+      const PageRequest(page: 0, pageSize: 100), // Standard limit for gallery
     );
 
     switch (result) {

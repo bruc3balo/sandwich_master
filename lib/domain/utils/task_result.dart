@@ -1,4 +1,6 @@
-sealed class TaskResult<T> {}
+sealed class TaskResult<T> {
+  const TaskResult();
+}
 
 class Success<T> extends TaskResult<T> {
   final T data;

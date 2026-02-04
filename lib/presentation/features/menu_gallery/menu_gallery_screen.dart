@@ -12,7 +12,7 @@ class MenuGalleryScreen extends StatelessWidget {
   const MenuGalleryScreen({super.key});
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
@@ -110,7 +110,7 @@ class _SandwichGalleryCard extends StatelessWidget {
   const _SandwichGalleryCard({required this.sandwich});
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -230,7 +230,7 @@ class _VisualStack extends StatelessWidget {
   const _VisualStack({required this.sandwich});
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     // Reverse order for a bottom-up stack visualization
     final allLayers = [
       sandwich.bread,
@@ -268,7 +268,7 @@ class _StackPill extends StatelessWidget {
   }
 
   @override
-  Widget Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final color = _getTypeColor();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -294,7 +294,7 @@ class _StackPill extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: color.shade900,
+              color: (color as MaterialColor).shade900,
             ),
           ),
         ],
