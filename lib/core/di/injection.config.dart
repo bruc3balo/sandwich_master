@@ -47,6 +47,8 @@ import 'package:form_ni_gani/domain/use_cases/sandwich/save_sandwich.dart'
     as _i71;
 import 'package:form_ni_gani/presentation/features/menu_gallery/menu_gallery_bloc.dart'
     as _i985;
+import 'package:form_ni_gani/presentation/features/pantry/pantry_bloc.dart'
+    as _i1022;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:hive/hive.dart' as _i979;
 import 'package:hive_flutter/hive_flutter.dart' as _i986;
@@ -103,6 +105,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i685.GetIngredientsUseCase(gh<_i1044.IngredientRepository>()));
     gh.lazySingleton<_i133.DeleteIngredientUseCase>(
         () => _i133.DeleteIngredientUseCase(gh<_i1044.IngredientRepository>()));
+    gh.factory<_i1022.PantryBloc>(() => _i1022.PantryBloc(
+          getIngredients: gh<_i685.GetIngredientsUseCase>(),
+          deleteIngredient: gh<_i133.DeleteIngredientUseCase>(),
+        ));
     return this;
   }
 }

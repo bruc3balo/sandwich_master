@@ -4,6 +4,8 @@ import 'package:form_ni_gani/domain/entities/sandwich.dart';
 import 'package:form_ni_gani/domain/entities/ingredient.dart';
 import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
 import 'package:form_ni_gani/presentation/widgets/component/image_card.dart';
+import 'package:go_router/go_router.dart';
+import 'package:form_ni_gani/core/navigation/app_router.dart';
 import 'menu_gallery_bloc.dart';
 import 'menu_gallery_event.dart';
 import 'menu_gallery_state.dart';
@@ -23,6 +25,15 @@ class MenuGalleryScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.inventory_2_outlined, color: Colors.black87),
+            onPressed: () {
+              context.push(AppRouter.pantry);
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: BlocBuilder<MenuGalleryBloc, MenuGalleryState>(
         builder: (context, state) {
