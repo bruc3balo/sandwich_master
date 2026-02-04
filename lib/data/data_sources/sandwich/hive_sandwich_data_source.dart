@@ -12,21 +12,16 @@ class HiveSandwichDataSource implements SandwichDataSource {
   @override
   Future<TaskResult<List<SandwichModel>>> getAll(PageRequest request) async {
     try {
-      final models = _box.values.toList();
+      final keys = _box.keys;
+      
+      final paginatedKeys = keys.skip(request.offset).take(request.limit);
+      
+      final models = paginatedKeys
+          .map((key) => _box.get(key))
+          .whereType<SandwichModel>()
+          .toList();
 
-      // Sort by name by default
-      models.sort((a, b) => a.name.compareTo(b.name));
-
-      final start = request.offset;
-      final end = (request.offset + request.limit).clamp(0, models.length);
-
-      if (start >= models.length) {
-        return const Success(data: [], message: 'No sandwiches found for this page');
-      }
-
-      final paginatedModels = models.sublist(start, end);
-
-      return Success(data: paginatedModels);
+      return Success(data: models);
     } catch (e, stackTrace) {
       return Failure(message: 'Failed to fetch sandwiches: $e', trace: stackTrace);
     }
