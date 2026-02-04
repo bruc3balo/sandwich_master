@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_ni_gani/domain/entities/ingredient.dart';
 import 'package:form_ni_gani/domain/entities/ingredient_type.dart';
 import 'package:form_ni_gani/presentation/widgets/component/ingredient_card.dart';
+import 'package:go_router/go_router.dart';
+import 'package:form_ni_gani/core/navigation/app_router.dart';
 import 'pantry_bloc.dart';
 import 'pantry_event.dart';
 import 'pantry_state.dart';
@@ -80,8 +82,11 @@ class PantryScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigation to Add Ingredient Form
+        onPressed: () async {
+          await context.push(AppRouter.addIngredient);
+          if (context.mounted) {
+            context.read<PantryBloc>().add(const FetchIngredients());
+          }
         },
         backgroundColor: Colors.green,
         child: const Icon(Icons.add_shopping_cart),
@@ -201,7 +206,11 @@ class _PantryIngredientItem extends StatelessWidget {
               if (value == 'delete') {
                 _confirmDelete(context);
               } else if (value == 'edit') {
-                // Navigate to edit form
+                context.push(AppRouter.addIngredient, extra: ingredient).then((_) {
+                  if (context.mounted) {
+                    context.read<PantryBloc>().add(const FetchIngredients());
+                  }
+                });
               }
             },
             itemBuilder: (context) => [

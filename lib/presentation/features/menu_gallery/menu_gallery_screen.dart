@@ -105,7 +105,7 @@ class MenuGalleryScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Navigation to Laboratory/Creator would go here
+          context.push(AppRouter.builder);
         },
         label: const Text('Create New'),
         icon: const Icon(Icons.add),
