@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Web WASM
-        run: flutter build web --wasm
+        run: flutter build web --wasm --base-href /sandwich_master/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
