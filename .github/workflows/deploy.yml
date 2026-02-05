@@ -22,7 +22,7 @@ jobs:
         with:
           channel: 'stable'
           # WASM support requires Flutter 3.22.0 or later
-          flutter-version: '3.22.0'
+          flutter-version: '3.38.9'
 
       - name: Install dependencies
         run: flutter pub get
