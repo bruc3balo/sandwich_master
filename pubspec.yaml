@@ -35,6 +35,15 @@ dev_dependencies:
   build_runner: ^2.4.13
   injectable_generator: ^2.6.2
   analyzer: ^6.4.1
+  msix: ^3.16.5
+
+msix_config:
+  display_name: Sandwich Master
+  publisher_display_name: Bruce Balo
+  identity_name: com.bruc3balo.sandwichmaster
+  msix_version: 1.0.0.0
+  logo_path: windows\runner\resources\app_icon.ico
+  capabilities: internetClient
 
 flutter:
   uses-material-design: true
