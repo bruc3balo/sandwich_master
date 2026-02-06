@@ -1,11 +1,11 @@
 {
-    "name": "form_ni_gani",
-    "short_name": "form_ni_gani",
+    "name": "Sandwich Master",
+    "short_name": "Sandwich Master",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFFFFF",
+    "theme_color": "#EC6D13",
+    "description": "A premium sandwich creation and collection app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

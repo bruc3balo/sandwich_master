@@ -12,6 +12,9 @@ abstract class RegisterModule {
   @preResolve
   Future<Box<SandwichModel>> get sandwichBox => _openBox<SandwichModel>('sandwiches');
 
+  @preResolve
+  Future<Box> get settingsBox => _openBox<dynamic>('settings');
+
   Future<Box<T>> _openBox<T>(String name) async {
     _registerAdapters();
     return await Hive.openBox<T>(name);

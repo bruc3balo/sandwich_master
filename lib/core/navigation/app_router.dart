@@ -16,11 +16,13 @@ import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredi
 import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredient_event.dart';
 import 'package:sandwich_master/presentation/features/add_ingredient/add_ingredient_screen.dart';
 import 'package:sandwich_master/domain/entities/ingredient.dart';
+import 'package:sandwich_master/presentation/features/welcome/welcome_screen.dart';
 
 class AppRouter {
   static const String root = '/';
   static const String pantry = '/pantry';
   static const String splash = '/splash';
+  static const String welcome = '/welcome';
   static const String builder = '/builder';
   static const String addIngredient = '/add-ingredient';
 
@@ -30,6 +32,10 @@ class AppRouter {
       GoRoute(
         path: splash,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: welcome,
+        builder: (context, state) => const WelcomeScreen(),
       ),
       GoRoute(
         path: root,

@@ -20,8 +20,8 @@ dependencies:
   
   # Utilities
   equatable: ^2.0.7
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
+  hive_ce: ^2.2.3
+  hive_ce_flutter: ^1.1.0
   get_it: ^8.0.3
   injectable: ^2.5.0
   go_router: ^14.7.2
@@ -36,6 +36,7 @@ dev_dependencies:
   injectable_generator: ^2.6.2
   analyzer: ^6.4.1
   msix: ^3.16.5
+  flutter_launcher_icons: ^0.13.1
 
 msix_config:
   display_name: Sandwich Master
@@ -44,6 +45,28 @@ msix_config:
   msix_version: 1.0.0.0
   logo_path: windows\runner\resources\app_icon.ico
   capabilities: internetClient
+  install_certificate: false
+  store: false
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  web:
+    generate: true
+    image_path: "assets/images/app_icon.png"
+    background_color: "#FFFFFF"
+    theme_color: "#EC6D13"
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon.png"
+    icon_size: 256
+  macos:
+    generate: true
+    image_path: "assets/images/app_icon.png"
+  linux:
+    generate: true
+    image_path: "assets/images/app_icon.png"
 
 flutter:
   uses-material-design: true

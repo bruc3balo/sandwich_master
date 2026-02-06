@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sandwich_master/core/navigation/app_router.dart';
+import 'package:sandwich_master/core/di/injection.dart';
+import 'package:sandwich_master/domain/repositories/settings_repository.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -47,9 +49,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _controller.forward();
 
     // Navigate after 2.5 seconds (animation + pause)
-    Future.delayed(const Duration(milliseconds: 2500), () {
+    Future.delayed(const Duration(milliseconds: 2500), () async {
       if (mounted) {
-        context.go(AppRouter.root);
+        final isFirstRun = await getIt<SettingsRepository>().isFirstRun();
+        if (mounted) {
+          context.go(isFirstRun ? AppRouter.welcome : AppRouter.root);
+        }
       }
     });
   }
